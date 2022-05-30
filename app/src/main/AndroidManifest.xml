@@ -15,6 +15,12 @@
             android:name=".ui.detail.DetailActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.home.ActivityHome"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>

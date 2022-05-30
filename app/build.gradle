@@ -61,7 +61,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3"
 
     //navigation component
-    def nav_version = "2.4.1"
+    def nav_version = "2.4.2"
 
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -69,4 +69,9 @@ dependencies {
 
     //circle image
     implementation "de.hdodenhof:circleimageview:3.1.0"
+
+    // RxJava
+    implementation "io.reactivex.rxjava3:rxjava:3.0.0"
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
 }

@@ -3,7 +3,6 @@ package com.althaafridha.receat.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.althaafridha.receat.data.NewRecipeResponse
 import com.althaafridha.receat.databinding.RowItemRecBinding
 import com.althaafridha.receat.utils.OnItemClickCallback
 import com.bumptech.glide.Glide

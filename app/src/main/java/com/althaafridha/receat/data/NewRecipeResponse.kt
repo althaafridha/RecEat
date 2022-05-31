@@ -1,4 +1,4 @@
-package com.althaafridha.receat.data
+package com.althaafridha.receat.ui
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

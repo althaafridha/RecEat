@@ -1,8 +1,8 @@
 package com.althaafridha.receat.utils
 
-import com.althaafridha.receat.ui.NewRecipeResponse
+import com.althaafridha.receat.data.NewRecipeItem
 
 interface OnItemClickCallback {
 
-	fun onItemClicked(item: NewRecipeResponse)
+	fun onItemClicked(item: NewRecipeItem)
 }

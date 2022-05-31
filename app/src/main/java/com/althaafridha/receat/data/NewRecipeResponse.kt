@@ -1,11 +1,17 @@
-package com.althaafridha.receat.ui
+package com.althaafridha.receat.data
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class NewRecipeResponse(
+
+	val result: List<NewRecipeItem>? = null
+): Parcelable
+
+@Parcelize
+data class NewRecipeItem(
 
 	@field:SerializedName("times")
 	val times: String? = null,

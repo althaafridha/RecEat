@@ -1,14 +1,13 @@
 package com.althaafridha.receat.ui
 
 import android.content.Intent
-import android.nfc.NfcAdapter.EXTRA_DATA
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.althaafridha.receat.R
+import com.althaafridha.receat.data.NewRecipeItem
 import com.althaafridha.receat.data.NewRecipeResponse
 import com.althaafridha.receat.databinding.ActivityMainBinding
 import com.althaafridha.receat.ui.detail.DetailActivity
@@ -33,20 +32,20 @@ class MainActivity : AppCompatActivity() {
 		viewModel.isError.observe(this) { showError(it) }
 		viewModel.recipeResponse.observe(this) { showData(it) }
 	}
-	private fun showData(data: List<NewRecipeResponse>?) {
+	private fun showData(data: List<NewRecipeItem>?) {
 		binding.recyclerMain.apply {
 			val mAdapter = RecipeAdapter()
 			mAdapter.setData(data)
 			layoutManager = GridLayoutManager(this@MainActivity, 2)
 			adapter = mAdapter
-//			mAdapter.setOnItemClickCallback(object : OnItemClickCallback {
-//				override fun onItemClicked(item: NewRecipeResponse) {
-//					startActivity(
-//						Intent(this@MainActivity, DetailActivity::class.java)
-//							.putExtra(DetailActivity.EXTRA_DATA, item)
-//					)
-//				}
-//			})
+			mAdapter.setOnItemClickCallback(object : OnItemClickCallback {
+				override fun onItemClicked(item: NewRecipeItem) {
+					startActivity(
+						Intent(this@MainActivity, DetailActivity::class.java)
+							.putExtra(DetailActivity.EXTRA_DATA, item)
+					)
+				}
+			})
 		}
 	}
 

@@ -30,8 +30,9 @@ class MainActivity : AppCompatActivity() {
 		viewModel.getNewRecipe()
 		viewModel.isLoading.observe(this) { showLoading(it) }
 		viewModel.isError.observe(this) { showError(it) }
-		viewModel.recipeResponse.observe(this) { showData(it) }
+		viewModel.recipeResponse.observe(this) { showData(it.result) }
 	}
+
 	private fun showData(data: List<NewRecipeItem>?) {
 		binding.recyclerMain.apply {
 			val mAdapter = RecipeAdapter()

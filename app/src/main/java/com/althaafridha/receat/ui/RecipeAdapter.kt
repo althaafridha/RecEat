@@ -47,7 +47,7 @@ class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 				.into(itemImg)
 
 			holder.itemView.setOnClickListener {
-				data?.let { item -> onItemClickCallback?.onItemClicked(item) }
+				data.let { item -> onItemClickCallback?.onItemClicked(item) }
 			}
 		}
 	}

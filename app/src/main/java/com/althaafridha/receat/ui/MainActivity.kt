@@ -1,15 +1,12 @@
 package com.althaafridha.receat.ui
 
 import android.content.Intent
-import android.nfc.NfcAdapter.EXTRA_DATA
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.althaafridha.receat.R
-import com.althaafridha.receat.data.NewRecipeResponse
 import com.althaafridha.receat.databinding.ActivityMainBinding
 import com.althaafridha.receat.ui.detail.DetailActivity
 import com.althaafridha.receat.utils.OnItemClickCallback
@@ -31,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 		viewModel.getNewRecipe()
 		viewModel.isLoading.observe(this) { showLoading(it) }
 		viewModel.isError.observe(this) { showError(it) }
-		viewModel.kisahResponse.observe(this) { showData(it) }
+		viewModel.newRecipeResponse.observe(this) { showData(it) }
 	}
 	private fun showData(data: List<NewRecipeResponse>?) {
 		binding.recyclerMain.apply {

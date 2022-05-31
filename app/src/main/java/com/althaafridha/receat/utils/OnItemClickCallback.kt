@@ -1,6 +1,6 @@
 package com.althaafridha.receat.utils
 
-import com.althaafridha.receat.data.NewRecipeResponse
+import com.althaafridha.receat.ui.NewRecipeResponse
 
 interface OnItemClickCallback {
 

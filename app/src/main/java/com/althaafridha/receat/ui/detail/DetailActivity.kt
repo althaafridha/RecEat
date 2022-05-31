@@ -1,10 +1,9 @@
 package com.althaafridha.receat.ui.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.althaafridha.receat.R
-import com.althaafridha.receat.data.NewRecipeResponse
+import androidx.appcompat.app.AppCompatActivity
 import com.althaafridha.receat.databinding.ActivityDetailBinding
+import com.althaafridha.receat.ui.NewRecipeResponse
 import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity() {

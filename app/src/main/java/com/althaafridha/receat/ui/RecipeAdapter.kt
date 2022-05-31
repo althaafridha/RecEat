@@ -23,7 +23,7 @@ class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 
 	private var onItemClickCallback: OnItemClickCallback? = null
 
-	fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+	fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
 		this.onItemClickCallback = onItemClickCallback
 	}
 
@@ -37,7 +37,10 @@ class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 	override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 		val data = listNewRecipe[position]
 		holder.binding.apply {
-			itemName.text = data.name
+			val splittedData = data.name?.substring(5, data.name.length)?.split("-")?.toTypedArray()
+			val joinedData = splittedData?.joinToString(" ")
+
+			itemName.text = joinedData
 			Glide.with(itemImg.context)
 				.load(data.imageUrl)
 				.apply(RequestOptions())

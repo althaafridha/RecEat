@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 		viewModel.getNewRecipe()
 		viewModel.isLoading.observe(this) { showLoading(it) }
 		viewModel.isError.observe(this) { showError(it) }
-		viewModel.kisahResponse.observe(this) { showData(it) }
+		viewModel.recipeResponse.observe(this) { showData(it) }
 	}
 	private fun showData(data: List<NewRecipeResponse>?) {
 		binding.recyclerMain.apply {
@@ -39,14 +39,14 @@ class MainActivity : AppCompatActivity() {
 			mAdapter.setData(data)
 			layoutManager = GridLayoutManager(this@MainActivity, 2)
 			adapter = mAdapter
-			mAdapter.setOnItemClickCallback(object : OnItemClickCallback {
-				override fun onItemClicked(item: NewRecipeResponse) {
-					startActivity(
-						Intent(this@MainActivity, DetailActivity::class.java)
-							.putExtra(DetailActivity.EXTRA_DATA, item)
-					)
-				}
-			})
+//			mAdapter.setOnItemClickCallback(object : OnItemClickCallback {
+//				override fun onItemClicked(item: NewRecipeResponse) {
+//					startActivity(
+//						Intent(this@MainActivity, DetailActivity::class.java)
+//							.putExtra(DetailActivity.EXTRA_DATA, item)
+//					)
+//				}
+//			})
 		}
 	}
 

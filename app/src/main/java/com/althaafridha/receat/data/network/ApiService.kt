@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface ApiService {
 
 	@GET("api/recipes")
-	fun getNewRecipe(): Flowable<List<NewRecipeResponse>>
+	fun getNewRecipe(): Flowable<NewRecipeResponse>
 }

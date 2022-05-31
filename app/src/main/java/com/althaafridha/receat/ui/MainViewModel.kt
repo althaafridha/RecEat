@@ -11,7 +11,7 @@ class MainViewModel: ViewModel() {
 
 	var isLoading = MutableLiveData<Boolean>()
 	var isError = MutableLiveData<Throwable>()
-	var kisahResponse = MutableLiveData<List<NewRecipeResponse>>()
+	var recipeResponse = MutableLiveData<List<NewRecipeResponse>>()
 
 	fun getData(responseHandler: (List<NewRecipeResponse>) -> Unit, errorHandler: (Throwable) -> Unit) {
 		ApiClient.getApiService().getNewRecipe()
@@ -20,7 +20,7 @@ class MainViewModel: ViewModel() {
 			// menentukan dimana thread akan dibuat
 			.observeOn(AndroidSchedulers.mainThread())
 			.subscribe({
-				responseHandler(it)
+				responseHandler(this.recipeResponse.value!!)
 			}, {
 				errorHandler(it)
 			})
@@ -30,7 +30,7 @@ class MainViewModel: ViewModel() {
 		isLoading.value = true
 		getData({
 			isLoading.value = false
-			kisahResponse.value = it
+			recipeResponse.value = it
 		},{
 			isLoading.value = false
 			isError.value = it

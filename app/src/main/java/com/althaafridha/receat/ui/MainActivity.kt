@@ -10,6 +10,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.althaafridha.receat.data.NewRecipeItem
 import com.althaafridha.receat.databinding.ActivityMainBinding
 import com.althaafridha.receat.ui.detail.DetailActivity
@@ -43,10 +44,10 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	private fun showData(data: List<NewRecipeItem>?) {
-		binding.recyclerMain.apply {
+		binding.recyclerView.apply {
 			val mAdapter = RecipeAdapter()
 			mAdapter.setData(data)
-			layoutManager = GridLayoutManager(this@MainActivity, 1)
+			layoutManager = LinearLayoutManager(this@MainActivity)
 			adapter = mAdapter
 			mAdapter.setOnItemClickCallback(object : OnItemClickCallback {
 				override fun onItemClicked(item: NewRecipeItem) {

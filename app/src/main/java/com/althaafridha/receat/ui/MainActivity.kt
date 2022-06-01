@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 		binding.recyclerMain.apply {
 			val mAdapter = RecipeAdapter()
 			mAdapter.setData(data)
-			layoutManager = GridLayoutManager(this@MainActivity, 2)
+			layoutManager = GridLayoutManager(this@MainActivity, 1)
 			adapter = mAdapter
 			mAdapter.setOnItemClickCallback(object : OnItemClickCallback {
 				override fun onItemClicked(item: NewRecipeItem) {

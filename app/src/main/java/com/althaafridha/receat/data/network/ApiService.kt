@@ -11,6 +11,6 @@ interface ApiService {
 	fun getNewRecipe(): Flowable<NewRecipeResponse>
 
 	@GET("/api/recipe/key")
-	fun getRecipe(): Flowable<DetailResponse>
+	fun getDetailRecipe(): Flowable<DetailResponse>
 
 }

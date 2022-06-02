@@ -13,39 +13,38 @@
 
         <TextView
             android:id="@+id/tv_hello"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/inter_extrabold"
             android:text="Hello, Chef"
             android:textColor="@color/black"
-            android:fontFamily="@font/inter_extrabold"
             android:textSize="30sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="25dp"
             android:src="@drawable/profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tv_today"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Today's Menu"
-            android:textSize="20sp"
-            android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
-            android:textColor="@color/black"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/inter_bold"
-            app:layout_constraintTop_toBottomOf="@+id/tv_hello"/>
+            android:text="Today's Menu"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hello" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/rectangle_2"
@@ -54,24 +53,41 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="11dp"
             android:layout_marginEnd="20dp"
-            app:cardCornerRadius="20dp"
             android:background="@drawable/ic_launcher_background"
-            app:layout_constraintTop_toBottomOf="@id/tv_today" />
+            app:cardCornerRadius="20dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_today">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/recyclerview" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/new_recipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="New Recipes"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/rectangle_2"
+            app:layout_constraintTop_toBottomOf="@id/rectangle_2" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingBottom="20dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
-            tools:listitem="@layout/row_item_rec"
+            android:paddingBottom="20dp"
             android:soundEffectsEnabled="false"
-            app:layout_constraintTop_toBottomOf="@id/rectangle_2"
             app:layout_constraintStart_toStartOf="parent"
-            />
-
+            app:layout_constraintTop_toBottomOf="@id/new_recipe"
+            tools:listitem="@layout/row_item_rec" />
 
         <ProgressBar
             android:id="@+id/progress_main"
@@ -81,8 +97,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

@@ -45,7 +45,7 @@
             android:ellipsize="end"
             android:gravity="center|center"
             android:maxLines="2"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimarySecond"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

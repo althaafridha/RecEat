@@ -67,8 +67,12 @@ class MainActivity : AppCompatActivity() {
 	private fun showLoading(isLoading: Boolean?) {
 		if (isLoading == true) {
 			binding.progressMain.visibility = View.VISIBLE
+			binding.recyclerView.visibility = View.INVISIBLE
+			binding.rectangle2.visibility = View.INVISIBLE
 		} else {
 			binding.progressMain.visibility = View.INVISIBLE
+			binding.recyclerView.visibility = View.VISIBLE
+			binding.rectangle2.visibility = View.VISIBLE
 		}
 	}
 }

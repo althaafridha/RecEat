@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.althaafridha.receat.data.NewRecipeItem
-import com.althaafridha.receat.data.NewRecipeResponse
 import com.althaafridha.receat.databinding.RowItemRecBinding
 import com.althaafridha.receat.utils.OnItemClickCallback
 import com.bumptech.glide.Glide
@@ -12,8 +11,12 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 
+
 class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 	private var listNewRecipe = ArrayList<NewRecipeItem>()
+
+	private val limit = 3
+
 
 	fun setData(data: List<NewRecipeItem>?) {
 		if (data == null) return
@@ -55,5 +58,11 @@ class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 		}
 	}
 
-	override fun getItemCount() = listNewRecipe.size
+	override fun getItemCount(): Int {
+		return if (listNewRecipe.size > limit) {
+			limit
+		} else {
+			listNewRecipe.size
+		}
+	}
 }

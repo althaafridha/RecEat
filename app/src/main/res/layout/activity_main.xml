@@ -60,8 +60,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@drawable/recyclerview" />
+                android:scaleType="fitXY" />
         </androidx.cardview.widget.CardView>
 
         <TextView

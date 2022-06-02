@@ -27,6 +27,19 @@ class MainViewModel : ViewModel() {
 			})
 	}
 
+	fun getDataByQuery(responseHandler: (NewRecipeResponse) -> Unit, errorHandler: (Throwable) -> Unit, query: String) {
+		ApiClient.getApiService().getRecipeBySearch(query)
+			// membuat background thread / proses asynchronous
+			.subscribeOn(Schedulers.io())
+			// menentukan dimana thread akan dibuat
+			.observeOn(AndroidSchedulers.mainThread())
+			.subscribe({
+				responseHandler(it)
+			}, {
+				errorHandler(it)
+			})
+	}
+
 	fun getNewRecipe() {
 		isLoading.value = true
 		getData({
@@ -36,6 +49,17 @@ class MainViewModel : ViewModel() {
 			isLoading.value = false
 			isError.value = it
 		})
+	}
+
+	fun getNewRecipeBySearch(query: String) {
+		isLoading.value = true
+		getDataByQuery({
+			isLoading.value = false
+			recipeResponse.value = it
+		}, {
+			isLoading.value = false
+			isError.value = it
+		}, query)
 	}
 
 }

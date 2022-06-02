@@ -16,4 +16,9 @@ interface ApiService {
 		@Query("key") key: String
 	): Flowable<DetailResponse>
 
+	@GET("/api/recipe")
+	fun getRecipeBySearch(
+		@Query("q") key: String
+	): Flowable<NewRecipeResponse>
+
 }

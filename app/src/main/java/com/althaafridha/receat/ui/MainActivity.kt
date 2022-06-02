@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.althaafridha.receat.data.NewRecipeItem
@@ -18,6 +19,9 @@ class MainActivity : AppCompatActivity() {
 	private var _binding: ActivityMainBinding? = null
 	private val binding get() = _binding as ActivityMainBinding
 
+	private var _viewModel: MainViewModel? = null
+	private val viewModel get() = _viewModel as MainViewModel
+
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -26,16 +30,16 @@ class MainActivity : AppCompatActivity() {
 		_binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 
+		setUpSortByMenu()
 
-
-		val viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+		_viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
 		viewModel.getNewRecipe()
 		viewModel.isLoading.observe(this) { showLoading(it) }
 		viewModel.isError.observe(this) { showError(it) }
-		viewModel.recipeResponse.observe(this) { showData(it.result) }
-
-
+		viewModel.recipeResponse.observe(this) {
+			showData(it.result)
+		}
 	}
 
 	private fun showData(data: List<NewRecipeItem>?) {
@@ -53,6 +57,25 @@ class MainActivity : AppCompatActivity() {
 				}
 			})
 		}
+	}
+
+	fun setUpSortByMenu() {
+		binding.svSearch.setOnQueryTextListener(object :
+			androidx.appcompat.widget.SearchView.OnQueryTextListener {
+			override fun onQueryTextSubmit(query: String?): Boolean {
+				viewModel.getNewRecipeBySearch(query!!)
+				viewModel.recipeResponse.observe (this@MainActivity) {
+					showData(it.result)
+				}
+				return false
+			}
+
+			override fun onQueryTextChange(newText: String?): Boolean {
+				viewModel.getNewRecipeBySearch(newText!!)
+				return false
+			}
+
+		})
 	}
 
 	private fun showError(isError: Throwable?) {

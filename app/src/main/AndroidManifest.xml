@@ -13,12 +13,6 @@
         android:theme="@style/Theme.RecEat"
         android:fitsSystemWindows="true">
         <activity
-            android:name=".ui.detail.DetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.profile.ProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>

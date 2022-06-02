@@ -12,10 +12,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 
 
-class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
+class RecipeAdapter() : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 	private var listNewRecipe = ArrayList<NewRecipeItem>()
-
-	private val limit = 3
 
 
 	fun setData(data: List<NewRecipeItem>?) {
@@ -58,11 +56,6 @@ class RecipeAdapter : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 		}
 	}
 
-	override fun getItemCount(): Int {
-		return if (listNewRecipe.size > limit) {
-			limit
-		} else {
-			listNewRecipe.size
-		}
-	}
+	override fun getItemCount() = 3
+
 }

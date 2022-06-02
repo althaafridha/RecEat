@@ -23,6 +23,11 @@ class DetailActivity : AppCompatActivity() {
                 Glide.with(this@DetailActivity,).load(data.imageUrl).into(imgDetail)
             }
         }
+
+        binding.btnDetailBack.setOnClickListener {
+            finish()
+        }
+
     }
 
     companion object {

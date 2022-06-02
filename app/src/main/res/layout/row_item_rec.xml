@@ -47,6 +47,7 @@
             android:maxLines="2"
             android:textColor="@color/colorPrimarySecond"
             android:textSize="20sp"
+            android:fontFamily="@font/inter_medium"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/page_text"

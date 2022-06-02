@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 	private var _binding: ActivityMainBinding? = null
 	private val binding get() = _binding as ActivityMainBinding
 
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 
 		super.onCreate(savedInstanceState)
@@ -29,12 +30,16 @@ class MainActivity : AppCompatActivity() {
 		_binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 
+
+
 		val viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
 		viewModel.getNewRecipe()
 		viewModel.isLoading.observe(this) { showLoading(it) }
 		viewModel.isError.observe(this) { showError(it) }
 		viewModel.recipeResponse.observe(this) { showData(it.result) }
+
+
 	}
 
 	private fun showData(data: List<NewRecipeItem>?) {

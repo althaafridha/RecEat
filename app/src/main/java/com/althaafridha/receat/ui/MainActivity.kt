@@ -1,19 +1,15 @@
 package com.althaafridha.receat.ui
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.althaafridha.receat.data.NewRecipeItem
 import com.althaafridha.receat.databinding.ActivityMainBinding
-import com.althaafridha.receat.ui.detail.DetailActivity
+import com.althaafridha.receat.ui.detail.DetailFragment
 import com.althaafridha.receat.utils.OnItemClickCallback
 
 
@@ -51,8 +47,8 @@ class MainActivity : AppCompatActivity() {
 			mAdapter.setOnItemClickCallback(object : OnItemClickCallback {
 				override fun onItemClicked(item: NewRecipeItem) {
 					startActivity(
-						Intent(this@MainActivity, DetailActivity::class.java)
-							.putExtra(DetailActivity.EXTRA_DATA, item)
+						Intent(this@MainActivity, DetailFragment::class.java)
+							.putExtra(DetailFragment.EXTRA_DATA, item)
 					)
 				}
 			})
@@ -74,4 +70,5 @@ class MainActivity : AppCompatActivity() {
 			binding.rectangle2.visibility = View.VISIBLE
 		}
 	}
+
 }

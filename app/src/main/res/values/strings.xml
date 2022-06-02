@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hi_mom_txt">Hi, Mom</string>
     <string name="img_item_img">image for show a example of the recipe</string>
+    <string name="title_explore">Explore</string>
+    <string name="title_profile">Profile</string>
 </resources>

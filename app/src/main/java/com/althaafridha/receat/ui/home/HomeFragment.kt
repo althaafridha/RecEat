@@ -1,60 +1,103 @@
 package com.althaafridha.receat.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil.setContentView
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.althaafridha.receat.R
+import com.althaafridha.receat.data.NewRecipeItem
+import com.althaafridha.receat.databinding.FragmentHomeBinding
+import com.althaafridha.receat.ui.MainViewModel
+import com.althaafridha.receat.ui.RecipeAdapter
+import com.althaafridha.receat.ui.detail.DetailFragment
+import com.althaafridha.receat.utils.OnItemClickCallback
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-	// TODO: Rename and change types of parameters
-	private var param1: String? = null
-	private var param2: String? = null
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		arguments?.let {
-			param1 = it.getString(ARG_PARAM1)
-			param2 = it.getString(ARG_PARAM2)
-		}
-	}
+	private var _binding: FragmentHomeBinding? = null
+	private val binding get() = _binding as FragmentHomeBinding
+
+	private var _viewModel: MainViewModel? = null
+	private val viewModel get() = _viewModel as MainViewModel
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_home, container, false)
+		_binding = FragmentHomeBinding.inflate(layoutInflater)
+
+		setUpSortByMenu()
+
+		_viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+		viewModel.getNewRecipe()
+		viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
+		viewModel.isError.observe(viewLifecycleOwner) { showError(it) }
+		viewModel.recipeResponse.observe(viewLifecycleOwner) {
+			showData(it.result)
+		}
+
+		return binding.root
+	}
+	private fun showData(data: List<NewRecipeItem>?) {
+		binding.recyclerView.apply {
+			val mAdapter = RecipeAdapter()
+			mAdapter.setData(data)
+			layoutManager = LinearLayoutManager(context)
+			adapter = mAdapter
+			mAdapter.setOnItemClickCallback(object : OnItemClickCallback {
+				override fun onItemClicked(item: NewRecipeItem) {
+					val bundle = Bundle()
+					bundle.putParcelable("data", item)
+					findNavController(binding.root).navigate(R.id.action_homeFragment_to_detailFragment, bundle)
+				}
+			})
+		}
 	}
 
-	companion object {
-		/**
-		 * Use this factory method to create a new instance of
-		 * this fragment using the provided parameters.
-		 *
-		 * @param param1 Parameter 1.
-		 * @param param2 Parameter 2.
-		 * @return A new instance of fragment HomeFragment.
-		 */
-		// TODO: Rename and change types and number of parameters
-		@JvmStatic
-		fun newInstance(param1: String, param2: String) =
-			HomeFragment().apply {
-				arguments = Bundle().apply {
-					putString(ARG_PARAM1, param1)
-					putString(ARG_PARAM2, param2)
+	fun setUpSortByMenu() {
+		binding.svSearch.setOnQueryTextListener(object :
+			androidx.appcompat.widget.SearchView.OnQueryTextListener {
+			override fun onQueryTextSubmit(query: String?): Boolean {
+				viewModel.getNewRecipeBySearch(query!!)
+				viewModel.recipeResponse.observe (viewLifecycleOwner) {
+					showData(it.result)
 				}
+				return false
 			}
+
+			override fun onQueryTextChange(newText: String?): Boolean {
+				viewModel.getNewRecipeBySearch(newText!!)
+				viewModel.recipeResponse.observe (viewLifecycleOwner) {
+					showData(it.result)
+				}
+				return false
+			}
+
+		})
+	}
+
+	private fun showError(isError: Throwable?) {
+		Log.e("MainActivity", "Error get data $isError")
+	}
+
+	private fun showLoading(isLoading: Boolean?) {
+		if (isLoading == true) {
+			binding.progressMain.visibility = View.VISIBLE
+			binding.recyclerView.visibility = View.INVISIBLE
+			binding.rectangle2.visibility = View.INVISIBLE
+		} else {
+			binding.progressMain.visibility = View.INVISIBLE
+			binding.recyclerView.visibility = View.VISIBLE
+			binding.rectangle2.visibility = View.VISIBLE
+		}
 	}
 }

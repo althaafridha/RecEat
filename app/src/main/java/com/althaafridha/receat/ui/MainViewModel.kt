@@ -2,7 +2,6 @@ package com.althaafridha.receat.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.althaafridha.receat.data.NewRecipeItem
 import com.althaafridha.receat.data.NewRecipeResponse
 import com.althaafridha.receat.data.network.ApiClient
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

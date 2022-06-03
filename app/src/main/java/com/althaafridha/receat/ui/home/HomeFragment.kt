@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
@@ -66,16 +67,18 @@ class HomeFragment : Fragment() {
 	fun setUpSortByMenu() {
 		binding.svSearch.setOnQueryTextListener(object :
 			androidx.appcompat.widget.SearchView.OnQueryTextListener {
-			override fun onQueryTextSubmit(query: String?): Boolean {
-				viewModel.getNewRecipeBySearch(query!!)
+			override fun onQueryTextSubmit(query: String): Boolean {
+				viewModel.getNewRecipeBySearch(query)
+				binding.rectangle2.visibility = View.GONE
 				viewModel.recipeResponse.observe (viewLifecycleOwner) {
 					showData(it.result)
 				}
 				return false
 			}
 
-			override fun onQueryTextChange(newText: String?): Boolean {
-				viewModel.getNewRecipeBySearch(newText!!)
+			override fun onQueryTextChange(newText: String): Boolean {
+				viewModel.getNewRecipeBySearch(newText)
+				binding.svSearch.visibility = View.VISIBLE
 				viewModel.recipeResponse.observe (viewLifecycleOwner) {
 					showData(it.result)
 				}
@@ -83,6 +86,36 @@ class HomeFragment : Fragment() {
 			}
 
 		})
+
+		binding.svSearch.setOnQueryTextFocusChangeListener { _, b ->
+			val constraintSet = ConstraintSet()
+			if (!b) {
+				binding.rectangle2.visibility = View.GONE
+				binding.tvToday.visibility = View.GONE
+				constraintSet.clone(binding.constraintHome)
+				constraintSet.connect(
+					binding.newRecipe.id,
+					ConstraintSet.TOP,
+					binding.svSearch.id,
+					ConstraintSet.BOTTOM
+				)
+			} else {
+				binding.rectangle2.visibility = View.VISIBLE
+				binding.tvToday.visibility = View.VISIBLE
+				constraintSet.clone(binding.constraintHome)
+				constraintSet.connect(
+					binding.newRecipe.id,
+					ConstraintSet.TOP,
+					binding.cvSearch.id,
+					ConstraintSet.BOTTOM
+				)
+			}
+
+		}
+	}
+
+	private fun search() {
+
 	}
 
 	private fun showError(isError: Throwable?) {

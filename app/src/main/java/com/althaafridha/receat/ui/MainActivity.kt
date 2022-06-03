@@ -1,19 +1,15 @@
 package com.althaafridha.receat.ui
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.althaafridha.receat.R
-import com.althaafridha.receat.data.NewRecipeItem
 import com.althaafridha.receat.databinding.ActivityMainBinding
-import com.althaafridha.receat.ui.detail.DetailFragment
-import com.althaafridha.receat.utils.OnItemClickCallback
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,17 +17,23 @@ class MainActivity : AppCompatActivity() {
 	private var _binding: ActivityMainBinding? = null
 	private val binding get() = _binding as ActivityMainBinding
 
-
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		_binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 
+		val navView: BottomNavigationView = binding.navView
+		val bottomNavController = findNavController(R.id.nav_host_fragment_container)
+		val appBarConfiguration =
+			AppBarConfiguration(setOf(R.id.homeFragment, R.id.profileFragment))
 
+		setupActionBarWithNavController(bottomNavController, appBarConfiguration)
+		navView.setupWithNavController(bottomNavController)
+		binding.navView.selectedItemId = R.id.nav_host_fragment_container
 	}
 
 	override fun onSupportNavigateUp(): Boolean {
-		val navController = findNavController(binding.navHostFragmentContainer)
+		val navController = findNavController(binding.navView)
 		return super.onSupportNavigateUp() || navController.navigateUp()
 	}
 

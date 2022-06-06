@@ -28,20 +28,11 @@ class DetailFragment : Fragment() {
         _binding = FragmentDetailBinding.inflate(layoutInflater)
 
         val viewModel = ViewModelProvider(this)[DetailViewModel::class.java]
-        val data = arguments?.getParcelable<NewRecipeItem>("data")
+        val data = arguments?.getString("RECIPE_NAME")
 
-        data?.name?.let {
-            viewModel.getData({
-                detailResponse = it
-                Log.i("detailactivity", "onCreate: $it")
-            }, {
-                Log.i("detailactivity", "onCreate: $it")
-            }, it)
-        }
-        data?.let {
-            binding.apply {
-                Glide.with(this@DetailFragment,).load(data.imageUrl).into(imgDetail)
-            }
+        viewModel.getDetailById(data!!)
+        viewModel.detailResponse.observe(viewLifecycleOwner){
+            initView(it)
         }
 
         binding.btnDetailBack.setOnClickListener {
@@ -49,6 +40,17 @@ class DetailFragment : Fragment() {
         }
         return binding.root
     }
+
+    private fun initView(it: DetailResponse?) {
+        binding.apply {
+            tvTitle.text = it?.results?.title ?: "patahan"
+            Glide.with(requireContext())
+                .load(it?.results?.thumb)
+                .into(imgDetail)
+        }
+
+    }
+
 
     companion object {
         const val EXTRA_DATA = "extra_data"

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,7 +56,7 @@ class HomeFragment : Fragment() {
 			mAdapter.setOnItemClickCallback(object : OnItemClickCallback {
 				override fun onItemClicked(item: NewRecipeItem) {
 					val bundle = Bundle()
-					bundle.putParcelable("data", item)
+					bundle.putString("RECIPE_NAME", item.name)
 					findNavController(binding.root).navigate(R.id.action_homeFragment_to_detailFragment, bundle)
 				}
 			})

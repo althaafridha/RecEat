@@ -1,14 +1,12 @@
 package com.althaafridha.receat.ui.home
 
-
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +15,6 @@ import com.althaafridha.receat.data.NewRecipeItem
 import com.althaafridha.receat.databinding.FragmentHomeBinding
 import com.althaafridha.receat.ui.MainViewModel
 import com.althaafridha.receat.ui.RecipeAdapter
-import com.althaafridha.receat.ui.detail.DetailFragment
 import com.althaafridha.receat.utils.OnItemClickCallback
 
 class HomeFragment : Fragment() {
@@ -31,7 +28,7 @@ class HomeFragment : Fragment() {
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View? {
+	): View {
 		// Inflate the layout for this fragment
 		_binding = FragmentHomeBinding.inflate(layoutInflater)
 
@@ -40,7 +37,7 @@ class HomeFragment : Fragment() {
 		_viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
 		viewModel.getNewRecipe()
-//		viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
+		viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
 		viewModel.isError.observe(viewLifecycleOwner) { showError(it) }
 		viewModel.recipeResponse.observe(viewLifecycleOwner) {
 			showData(it.result)
@@ -64,7 +61,7 @@ class HomeFragment : Fragment() {
 		}
 	}
 
-	fun setUpSortByMenu() {
+	private fun setUpSortByMenu() {
 		binding.svSearch.setOnQueryTextListener(object :
 			androidx.appcompat.widget.SearchView.OnQueryTextListener {
 			override fun onQueryTextSubmit(query: String): Boolean {
@@ -93,6 +90,7 @@ class HomeFragment : Fragment() {
 				binding.rectangle2.visibility = View.GONE
 				binding.tvToday.visibility = View.GONE
 				binding.newRecipe.visibility = View.GONE
+				binding.tvSeeAll.visibility = View.GONE
 				constraintSet.clone(binding.constraintHome)
 				constraintSet.connect(
 					binding.recyclerView.id,
@@ -104,6 +102,7 @@ class HomeFragment : Fragment() {
 				binding.rectangle2.visibility = View.VISIBLE
 				binding.tvToday.visibility = View.VISIBLE
 				binding.newRecipe.visibility = View.VISIBLE
+				binding.tvSeeAll.visibility = View.VISIBLE
 				constraintSet.clone(binding.constraintHome)
 				constraintSet.connect(
 					binding.recyclerView.id,
@@ -117,24 +116,17 @@ class HomeFragment : Fragment() {
 		}
 	}
 
-	private fun search() {
-
-
-	}
-
 	private fun showError(isError: Throwable?) {
 		Log.e("MainActivity", "Error get data $isError")
 	}
 
-//	private fun showLoading(isLoading: Boolean?) {
-//		if (isLoading == true) {
-//			binding.progressMain.visibility = View.VISIBLE
-//			binding.recyclerView.visibility = View.INVISIBLE
-//			binding.rectangle2.visibility = View.INVISIBLE
-//		} else {
-//			binding.progressMain.visibility = View.INVISIBLE
-//			binding.recyclerView.visibility = View.VISIBLE
-//			binding.rectangle2.visibility = View.VISIBLE
-//		}
-//	}
+	private fun showLoading(isLoading: Boolean?) {
+		if (isLoading == true) {
+			binding.progressMain.visibility = View.VISIBLE
+			binding.recyclerView.visibility = View.INVISIBLE
+		} else {
+			binding.progressMain.visibility = View.INVISIBLE
+			binding.recyclerView.visibility = View.VISIBLE
+		}
+	}
 }

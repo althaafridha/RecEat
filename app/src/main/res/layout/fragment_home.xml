@@ -37,7 +37,7 @@ tools:context=".ui.MainActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_search"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="12dp"
         app:cardCornerRadius="12dp"

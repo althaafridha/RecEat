@@ -31,13 +31,14 @@ class DetailFragment : Fragment() {
         val data = arguments?.getString("RECIPE_NAME")
 
         viewModel.getDetailById(data!!)
+        viewModel.isLoading.observe(viewLifecycleOwner) {showLoading(it)}
         viewModel.detailResponse.observe(viewLifecycleOwner){
             initView(it)
         }
 
-        binding.btnDetailBack.setOnClickListener {
-            activity?.onBackPressed()
-        }
+//        binding.btnDetailBack.setOnClickListener {
+//            activity?.onBackPressed()
+//        }
         return binding.root
     }
 
@@ -51,6 +52,19 @@ class DetailFragment : Fragment() {
 
     }
 
+    private fun showLoading(isLoading: Boolean?) {
+        if (isLoading == true) {
+            binding.progressDetail.visibility = View.VISIBLE
+            binding.cvDetail.visibility = View.INVISIBLE
+            binding.tvTitle.visibility = View.INVISIBLE
+            binding.tvDescription.visibility = View.INVISIBLE
+        } else {
+            binding.progressDetail.visibility = View.INVISIBLE
+            binding.cvDetail.visibility = View.VISIBLE
+            binding.tvTitle.visibility = View.VISIBLE
+            binding.tvDescription.visibility = View.VISIBLE
+        }
+    }
 
     companion object {
         const val EXTRA_DATA = "extra_data"

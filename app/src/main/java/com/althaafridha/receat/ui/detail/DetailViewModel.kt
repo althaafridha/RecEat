@@ -10,9 +10,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class DetailViewModel : ViewModel() {
 
+	var isLoading = MutableLiveData<Boolean>()
 	var detailResponse =  MutableLiveData<DetailResponse>()
-
-
 
 
 //	make variable to get key from intent
@@ -28,7 +27,9 @@ class DetailViewModel : ViewModel() {
 	}
 
 	fun getDetailById(id: String) {
+		isLoading.value = true
 		DetailById({
+			isLoading.value = false
 			detailResponse.value = it
 		}, {}, id)
 	}

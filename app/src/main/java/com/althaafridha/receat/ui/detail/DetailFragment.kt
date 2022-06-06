@@ -48,7 +48,12 @@ class DetailFragment : Fragment() {
             Glide.with(requireContext())
                 .load(it?.results?.thumb)
                 .into(imgDetail)
+            tvTimes.text = it?.results?.times ?: "-"
+            tvDifficulty.text = it?.results?.dificulty ?: "-"
+            tvPortion.text = it?.results?.servings ?: "-"
+
         }
+
 
     }
 
@@ -57,12 +62,16 @@ class DetailFragment : Fragment() {
             binding.progressDetail.visibility = View.VISIBLE
             binding.cvDetail.visibility = View.INVISIBLE
             binding.tvTitle.visibility = View.INVISIBLE
-            binding.tvDescription.visibility = View.INVISIBLE
+            binding.tvTimes.visibility = View.INVISIBLE
+            binding.tvDifficulty.visibility = View.INVISIBLE
+            binding.tvPortion.visibility = View.INVISIBLE
         } else {
             binding.progressDetail.visibility = View.INVISIBLE
             binding.cvDetail.visibility = View.VISIBLE
             binding.tvTitle.visibility = View.VISIBLE
-            binding.tvDescription.visibility = View.VISIBLE
+            binding.tvTimes.visibility = View.VISIBLE
+            binding.tvDifficulty.visibility = View.VISIBLE
+            binding.tvPortion.visibility = View.VISIBLE
         }
     }
 

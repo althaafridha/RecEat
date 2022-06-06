@@ -52,13 +52,56 @@
             android:layout_margin="24dp"/>
 
     <TextView
-        android:id="@+id/tv_description"
+        android:drawableLeft="@drawable/ic_baseline_access_time_filled_24"
+        android:id="@+id/tv_times"
+        android:drawablePadding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_margin="24dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         android:layout_height="wrap_content"
+        android:text="Times" />
+
+    <TextView
+        android:id="@+id/tv_difficulty"
+        android:drawableLeft="@drawable/ic_baseline_auto_awesome_24"
+        android:drawablePadding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
+        android:layout_margin="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:layout_height="wrap_content"
+        android:text="Difficulty" />
+
+    <TextView
+        android:id="@+id/tv_portion"
+        android:layout_width="wrap_content"
+        android:layout_margin="24dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
+        android:drawableLeft="@drawable/ic_baseline_local_dining_24"
+        android:drawablePadding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:layout_height="wrap_content"
+        android:text="Portion" />
+
+    <TextView
+        android:id="@+id/tv_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_margin="24dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_medium"
+        app:layout_constraintTop_toBottomOf="@id/tv_times"
+        android:layout_height="wrap_content"
         android:text="Detail" />
+
 
     <ProgressBar
         android:id="@+id/progress_detail"

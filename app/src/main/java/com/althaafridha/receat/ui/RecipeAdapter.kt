@@ -56,6 +56,6 @@ class RecipeAdapter() : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 		}
 	}
 
-	override fun getItemCount() = 3
+	override fun getItemCount() = 5
 
 }

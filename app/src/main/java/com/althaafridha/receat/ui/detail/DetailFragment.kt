@@ -43,7 +43,7 @@ class DetailFragment : Fragment() {
 
     private fun initView(it: DetailResponse?) {
         binding.apply {
-            tvTitle.text = it?.results?.title ?: "patahan"
+            tvTitle.text = it?.results?.title ?: "sim"
             Glide.with(requireContext())
                 .load(it?.results?.thumb)
                 .into(imgDetail)

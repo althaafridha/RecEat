@@ -1,5 +1,6 @@
 package com.althaafridha.receat.ui.home
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -86,34 +87,35 @@ class HomeFragment : Fragment() {
 
 		})
 
-		binding.svSearch.setOnQueryTextFocusChangeListener { _, b ->
-			val constraintSet = ConstraintSet()
-			if (!b) {
-				binding.rectangle2.visibility = View.GONE
-				binding.tvToday.visibility = View.GONE
-				constraintSet.clone(binding.constraintHome)
-				constraintSet.connect(
-					binding.newRecipe.id,
-					ConstraintSet.TOP,
-					binding.svSearch.id,
-					ConstraintSet.BOTTOM
-				)
-			} else {
-				binding.rectangle2.visibility = View.VISIBLE
-				binding.tvToday.visibility = View.VISIBLE
-				constraintSet.clone(binding.constraintHome)
-				constraintSet.connect(
-					binding.newRecipe.id,
-					ConstraintSet.TOP,
-					binding.cvSearch.id,
-					ConstraintSet.BOTTOM
-				)
-			}
-
-		}
+//		binding.svSearch.setOnQueryTextFocusChangeListener { _, b ->
+//			val constraintSet = ConstraintSet()
+//			if (!b) {
+//				binding.rectangle2.visibility = View.GONE
+//				binding.tvToday.visibility = View.GONE
+//				constraintSet.clone(binding.constraintHome)
+//				constraintSet.connect(
+//					binding.newRecipe.id,
+//					ConstraintSet.TOP,
+//					binding.svSearch.id,
+//					ConstraintSet.BOTTOM
+//				)
+//			} else {
+//				binding.rectangle2.visibility = View.VISIBLE
+//				binding.tvToday.visibility = View.VISIBLE
+//				constraintSet.clone(binding.constraintHome)
+//				constraintSet.connect(
+//					binding.newRecipe.id,
+//					ConstraintSet.TOP,
+//					binding.cvSearch.id,
+//					ConstraintSet.BOTTOM
+//				)
+//			}
+//
+//		}
 	}
 
 	private fun search() {
+
 
 	}
 

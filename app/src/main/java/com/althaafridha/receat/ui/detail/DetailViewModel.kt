@@ -14,6 +14,7 @@ class DetailViewModel : ViewModel() {
 
 
 
+
 //	make variable to get key from intent
 	fun DetailById(responseHandler: (DetailResponse) -> Unit, errorHandler: (Throwable) -> Unit, key: String) {
 		ApiClient.getApiService().getDetailRecipe(key)

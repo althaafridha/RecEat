@@ -23,13 +23,16 @@ class MainActivity : AppCompatActivity() {
 		setContentView(binding.root)
 
 		val navView: BottomNavigationView = binding.navView
+
 		val bottomNavController = findNavController(R.id.nav_host_fragment_container)
 		val appBarConfiguration =
 			AppBarConfiguration(setOf(R.id.homeFragment, R.id.profileFragment))
 
-		setupActionBarWithNavController(bottomNavController, appBarConfiguration)
 		navView.setupWithNavController(bottomNavController)
 		binding.navView.selectedItemId = R.id.nav_host_fragment_container
+
+		supportActionBar?.hide()
+
 	}
 
 	override fun onSupportNavigateUp(): Boolean {

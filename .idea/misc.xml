@@ -9,19 +9,19 @@
         <entry key="..\:/Users/Danish/AndroidStudioProjects/RecEat/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Danish/AndroidStudioProjects/RecEat/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/Users/Danish/AndroidStudioProjects/RecEat/app/src/main/res/layout/fragment_detail.xml" value="0.25" />
-        <entry key="..\:/Users/Danish/AndroidStudioProjects/RecEat/app/src/main/res/layout/fragment_home.xml" value="0.16497263487099295" />
+        <entry key="..\:/Users/Danish/AndroidStudioProjects/RecEat/app/src/main/res/layout/fragment_home.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/Danish/AndroidStudioProjects/RecEat/app/src/main/res/layout/fragment_profile.xml" value="0.2359375" />
         <entry key="..\:/Users/Danish/AndroidStudioProjects/RecEat/app/src/main/res/layout/row_item_rec.xml" value="0.16799999999999998" />
-        <entry key="..\:/Users/Danish/AndroidStudioProjects/RecEat/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.18251953124999998" />
         <entry key="app/src/main/res/layout/activity_eactivity.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.3090611566691638" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.303129074315515" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15030467246004625" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.36115183070086043" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/row_item_rec.xml" value="0.21761658031088082" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2147567749023438" />
       </map>
     </option>
   </component>

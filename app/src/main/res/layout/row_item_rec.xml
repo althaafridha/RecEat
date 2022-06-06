@@ -30,10 +30,9 @@
                 android:id="@+id/item_img"
                 android:layout_width="150dp"
                 android:layout_height="120dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_background"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints"
                 android:contentDescription="@string/img_item_img" />
 
         </com.google.android.material.card.MaterialCardView>

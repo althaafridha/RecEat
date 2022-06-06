@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
 		_viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
 		viewModel.getNewRecipe()
-		viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
+//		viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
 		viewModel.isError.observe(viewLifecycleOwner) { showError(it) }
 		viewModel.recipeResponse.observe(viewLifecycleOwner) {
 			showData(it.result)
@@ -87,31 +87,34 @@ class HomeFragment : Fragment() {
 
 		})
 
-//		binding.svSearch.setOnQueryTextFocusChangeListener { _, b ->
-//			val constraintSet = ConstraintSet()
-//			if (!b) {
-//				binding.rectangle2.visibility = View.GONE
-//				binding.tvToday.visibility = View.GONE
-//				constraintSet.clone(binding.constraintHome)
-//				constraintSet.connect(
-//					binding.newRecipe.id,
-//					ConstraintSet.TOP,
-//					binding.svSearch.id,
-//					ConstraintSet.BOTTOM
-//				)
-//			} else {
-//				binding.rectangle2.visibility = View.VISIBLE
-//				binding.tvToday.visibility = View.VISIBLE
-//				constraintSet.clone(binding.constraintHome)
-//				constraintSet.connect(
-//					binding.newRecipe.id,
-//					ConstraintSet.TOP,
-//					binding.cvSearch.id,
-//					ConstraintSet.BOTTOM
-//				)
-//			}
-//
-//		}
+		binding.svSearch.setOnQueryTextFocusChangeListener { _, b ->
+			val constraintSet = ConstraintSet()
+			if (b) {
+				binding.rectangle2.visibility = View.GONE
+				binding.tvToday.visibility = View.GONE
+				binding.newRecipe.visibility = View.GONE
+				constraintSet.clone(binding.constraintHome)
+				constraintSet.connect(
+					binding.recyclerView.id,
+					ConstraintSet.TOP,
+					binding.cvSearch.id,
+					ConstraintSet.BOTTOM
+				)
+			} else {
+				binding.rectangle2.visibility = View.VISIBLE
+				binding.tvToday.visibility = View.VISIBLE
+				binding.newRecipe.visibility = View.VISIBLE
+				constraintSet.clone(binding.constraintHome)
+				constraintSet.connect(
+					binding.recyclerView.id,
+					ConstraintSet.TOP,
+					binding.newRecipe.id,
+					ConstraintSet.BOTTOM
+				)
+			}
+			constraintSet.applyTo(binding.constraintHome)
+
+		}
 	}
 
 	private fun search() {
@@ -123,15 +126,15 @@ class HomeFragment : Fragment() {
 		Log.e("MainActivity", "Error get data $isError")
 	}
 
-	private fun showLoading(isLoading: Boolean?) {
-		if (isLoading == true) {
-			binding.progressMain.visibility = View.VISIBLE
-			binding.recyclerView.visibility = View.INVISIBLE
-			binding.rectangle2.visibility = View.INVISIBLE
-		} else {
-			binding.progressMain.visibility = View.INVISIBLE
-			binding.recyclerView.visibility = View.VISIBLE
-			binding.rectangle2.visibility = View.VISIBLE
-		}
-	}
+//	private fun showLoading(isLoading: Boolean?) {
+//		if (isLoading == true) {
+//			binding.progressMain.visibility = View.VISIBLE
+//			binding.recyclerView.visibility = View.INVISIBLE
+//			binding.rectangle2.visibility = View.INVISIBLE
+//		} else {
+//			binding.progressMain.visibility = View.INVISIBLE
+//			binding.recyclerView.visibility = View.VISIBLE
+//			binding.rectangle2.visibility = View.VISIBLE
+//		}
+//	}
 }

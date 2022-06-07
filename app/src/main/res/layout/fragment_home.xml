@@ -7,6 +7,7 @@ android:layout_height="wrap_content"
 android:orientation="vertical"
 tools:context=".ui.MainActivity">
 
+    
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/constraint_home"
     android:layout_width="match_parent"
@@ -26,6 +27,7 @@ tools:context=".ui.MainActivity">
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/oya"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="26dp"
@@ -36,7 +38,7 @@ tools:context=".ui.MainActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_search"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="12dp"
         app:cardCornerRadius="12dp"
@@ -52,8 +54,6 @@ tools:context=".ui.MainActivity">
             android:id="@+id/sv_search"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="40dp"
             android:layout_marginBottom="48dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -104,7 +104,7 @@ tools:context=".ui.MainActivity">
         android:fontFamily="@font/inter_bold"
         android:text="Rekomendasi"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/rectangle_2"
         app:layout_constraintTop_toBottomOf="@id/rectangle_2" />
 

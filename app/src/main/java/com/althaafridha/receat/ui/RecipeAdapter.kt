@@ -39,7 +39,10 @@ class RecipeAdapter() : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 		val data = listNewRecipe[position]
 		holder.binding.apply {
 			val splittedData = data.name?.substring(5, data.name.length)?.split("-")?.toTypedArray()
-			val joinedData = splittedData?.joinToString(" ")
+			val capitalizedData = splittedData?.map {
+				it.capitalize()
+			}
+			val joinedData = capitalizedData?.joinTo(StringBuilder(), separator = " ")
 
 			itemName.text = joinedData
 			Glide.with(itemImg.context)

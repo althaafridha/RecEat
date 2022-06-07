@@ -1,14 +1,12 @@
 package com.althaafridha.receat.ui.home
 
-
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +15,6 @@ import com.althaafridha.receat.data.NewRecipeItem
 import com.althaafridha.receat.databinding.FragmentHomeBinding
 import com.althaafridha.receat.ui.MainViewModel
 import com.althaafridha.receat.ui.RecipeAdapter
-import com.althaafridha.receat.ui.detail.DetailFragment
 import com.althaafridha.receat.utils.OnItemClickCallback
 
 class HomeFragment : Fragment() {
@@ -31,7 +28,7 @@ class HomeFragment : Fragment() {
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View? {
+	): View {
 		// Inflate the layout for this fragment
 		_binding = FragmentHomeBinding.inflate(layoutInflater)
 
@@ -48,6 +45,7 @@ class HomeFragment : Fragment() {
 
 		return binding.root
 	}
+
 	private fun showData(data: List<NewRecipeItem>?) {
 		binding.recyclerView.apply {
 			val mAdapter = RecipeAdapter()
@@ -64,7 +62,7 @@ class HomeFragment : Fragment() {
 		}
 	}
 
-	fun setUpSortByMenu() {
+	private fun setUpSortByMenu() {
 		binding.svSearch.setOnQueryTextListener(object :
 			androidx.appcompat.widget.SearchView.OnQueryTextListener {
 			override fun onQueryTextSubmit(query: String): Boolean {
@@ -87,36 +85,36 @@ class HomeFragment : Fragment() {
 
 		})
 
-//		binding.svSearch.setOnQueryTextFocusChangeListener { _, b ->
-//			val constraintSet = ConstraintSet()
-//			if (!b) {
-//				binding.rectangle2.visibility = View.GONE
-//				binding.tvToday.visibility = View.GONE
-//				constraintSet.clone(binding.constraintHome)
-//				constraintSet.connect(
-//					binding.newRecipe.id,
-//					ConstraintSet.TOP,
-//					binding.svSearch.id,
-//					ConstraintSet.BOTTOM
-//				)
-//			} else {
-//				binding.rectangle2.visibility = View.VISIBLE
-//				binding.tvToday.visibility = View.VISIBLE
-//				constraintSet.clone(binding.constraintHome)
-//				constraintSet.connect(
-//					binding.newRecipe.id,
-//					ConstraintSet.TOP,
-//					binding.cvSearch.id,
-//					ConstraintSet.BOTTOM
-//				)
-//			}
-//
-//		}
-	}
+		binding.svSearch.setOnQueryTextFocusChangeListener { _, b ->
+			val constraintSet = ConstraintSet()
+			if (b) {
+				binding.rectangle2.visibility = View.GONE
+				binding.tvToday.visibility = View.GONE
+				binding.newRecipe.visibility = View.GONE
+				binding.tvSeeAll.visibility = View.GONE
+				constraintSet.clone(binding.constraintHome)
+				constraintSet.connect(
+					binding.recyclerView.id,
+					ConstraintSet.TOP,
+					binding.cvSearch.id,
+					ConstraintSet.BOTTOM
+				)
+			} else {
+				binding.rectangle2.visibility = View.VISIBLE
+				binding.tvToday.visibility = View.VISIBLE
+				binding.newRecipe.visibility = View.VISIBLE
+				binding.tvSeeAll.visibility = View.VISIBLE
+				constraintSet.clone(binding.constraintHome)
+				constraintSet.connect(
+					binding.recyclerView.id,
+					ConstraintSet.TOP,
+					binding.newRecipe.id,
+					ConstraintSet.BOTTOM
+				)
+			}
+			constraintSet.applyTo(binding.constraintHome)
 
-	private fun search() {
-
-
+		}
 	}
 
 	private fun showError(isError: Throwable?) {
@@ -127,11 +125,9 @@ class HomeFragment : Fragment() {
 		if (isLoading == true) {
 			binding.progressMain.visibility = View.VISIBLE
 			binding.recyclerView.visibility = View.INVISIBLE
-			binding.rectangle2.visibility = View.INVISIBLE
 		} else {
 			binding.progressMain.visibility = View.INVISIBLE
 			binding.recyclerView.visibility = View.VISIBLE
-			binding.rectangle2.visibility = View.VISIBLE
 		}
 	}
 }

@@ -8,4 +8,7 @@
     <string name="title_profile">Profile</string>
     <string name="txt_img_detail">image for describing the recipe</string>
     <string name="img_food_img">image for describing the recipe with a picture</string>
+    <string name="txt_tv_reommend">Rekomendasi</string>
+    <string name="txt_tv_ask">Mau masak apa hari ini</string>
+    <string name="txt_tv_name">Hi, User!</string>
 </resources>

@@ -32,7 +32,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="50dp"
                     android:fontFamily="@font/inter_bold"
-                    android:text="Hi, Anto"
+                    android:text="@string/txt_tv_name"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/inter_regular"
-                    android:text="Mau masak apa hari ini"
+                    android:text="@string/txt_tv_ask"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -94,6 +94,27 @@
 
         </androidx.cardview.widget.CardView>
 
+        <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+            android:id="@+id/rv_head"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="20dp"
+            android:translationZ="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_search"
+            tools:listitem="@layout/row_item_today" />
+
+        <TextView
+            android:id="@+id/tv_recommend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_tv_reommend"
+            app:layout_constraintTop_toBottomOf="@id/rv_head"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/inter_semibold"
+            android:textSize="16sp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
@@ -105,18 +126,11 @@
             android:soundEffectsEnabled="false"
             android:translationZ="5dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_head"
+            app:layout_constraintTop_toBottomOf="@id/tv_recommend"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/row_item_rec" />
 
-        <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
-            android:id="@+id/rv_head"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:translationZ="50dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cv_search"
-            tools:listitem="@layout/row_item_today" />
+
 
 
         <ProgressBar

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.althaafridha.receat.data.ResultsItem
 import com.althaafridha.receat.databinding.RowItemTodayBinding
+import com.althaafridha.receat.utils.OnItemClickCallback
 import com.althaafridha.receat.utils.OnItemClickCallbackHead
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
@@ -22,7 +23,7 @@ class HeadlineAdapter : RecyclerView.Adapter<HeadlineAdapter.MyViewHolder>() {
 
 	private var onItemClickCallbackHead: OnItemClickCallbackHead? = null
 
-	fun setOnItemClickCallback(onItemClickCallbackHead: OnItemClickCallbackHead) {
+	fun setOnItemClickCallbackHead(onItemClickCallbackHead: OnItemClickCallbackHead) {
 		this.onItemClickCallbackHead = onItemClickCallbackHead
 	}
 

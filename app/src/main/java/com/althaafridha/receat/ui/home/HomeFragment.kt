@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,7 @@ import com.althaafridha.receat.ui.MainViewModel
 import com.althaafridha.receat.ui.RecipeAdapter
 import com.althaafridha.receat.utils.OnItemClickCallback
 import com.althaafridha.receat.utils.OnItemClickCallbackHead
+import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
 
 class HomeFragment : Fragment() {
 
@@ -40,19 +42,39 @@ class HomeFragment : Fragment() {
 		_viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
 		viewModel.getNewRecipe()
+
+		viewModel.recipeResponse.observe(viewLifecycleOwner) {
+			showHomeData(it.result)
+		}
+
+		viewModel.getHeadRecipe()
+
 		viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
 		viewModel.isError.observe(viewLifecycleOwner) { showError(it) }
-		viewModel.recipeResponse.observe(viewLifecycleOwner) {
-			showData(it.result, null)
-		}
+
+
 		viewModel.headResponse.observe(viewLifecycleOwner) {
-			showData(null, it.results as List<ResultsItem>?)
+			showHeadlineData(it.results)
 		}
 
 		return binding.root
 	}
 
-	private fun showData(data: List<NewRecipeItem>?, headlineData: List<ResultsItem>?) {
+	private fun showHeadlineData(data: List<ResultsItem>?) {
+		binding.rvHead.apply {
+			val mAdapter = HeadlineAdapter()
+			mAdapter.setData(data)
+			set3DItem(true)
+			setInfinite(true)
+			setAlpha(true)
+			setFlat(true)
+			setIsScrollingEnabled(true)
+			layoutManager = getCarouselLayoutManager()
+			adapter = mAdapter
+		}
+	}
+
+	private fun showHomeData(data: List<NewRecipeItem>?) {
 		binding.recyclerView.apply {
 			val mAdapter = RecipeAdapter()
 
@@ -67,23 +89,8 @@ class HomeFragment : Fragment() {
 				}
 			})
 		}
-
-		binding.rvHead.apply {
-			val mAdapter = HeadlineAdapter()
-			mAdapter.setData(headlineData)
-			layoutManager = LinearLayoutManager(context)
-			adapter = mAdapter
-			mAdapter.setOnItemClickCallback(object : OnItemClickCallbackHead {
-				override fun onItemClicked(item: ResultsItem) {
-					val bundle = Bundle()
-					bundle.putString("RECIPE_NAME", item.title)
-					findNavController(binding.root).navigate(R.id.action_homeFragment_to_detailFragment, bundle)
-				}
-			})
-		}
-
-
 	}
+
 
 	private fun setUpSortByMenu() {
 		binding.svSearch.setOnQueryTextListener(object :
@@ -91,9 +98,14 @@ class HomeFragment : Fragment() {
 			override fun onQueryTextSubmit(query: String): Boolean {
 				viewModel.getNewRecipeBySearch(query)
 				binding.rvHead.visibility = View.GONE
-				viewModel.recipeResponse.observe (viewLifecycleOwner) {
-					showData(it.result, null    )
-				}
+//				viewModel.recipeResponse.observe (viewLifecycleOwner) {
+//					if (it.result?.size!! <= 0) {
+//						Toast.makeText(context, "Masakan tidak ditemukan", Toast.LENGTH_SHORT).show()
+//					} else {
+//						showHomeData(it.result)
+//					}
+//				}
+
 				return false
 			}
 
@@ -101,10 +113,7 @@ class HomeFragment : Fragment() {
 				viewModel.getNewRecipeBySearch(newText)
 				binding.svSearch.visibility = View.VISIBLE
 				viewModel.recipeResponse.observe (viewLifecycleOwner) {
-					showData(it.result, null)
-				}
-				viewModel.recipeResponse.observe (viewLifecycleOwner) {
-					showData(it.result, null)
+					showHomeData(it.result)
 				}
 				return false
 			}
@@ -115,6 +124,7 @@ class HomeFragment : Fragment() {
 			val constraintSet = ConstraintSet()
 			if (b) {
 				binding.rvHead.visibility = View.GONE
+				binding.tvRecommend.visibility = View.GONE
 				constraintSet.clone(binding.constraintHome)
 				constraintSet.connect(
 					binding.recyclerView.id,
@@ -124,6 +134,7 @@ class HomeFragment : Fragment() {
 				)
 			} else {
 				binding.rvHead.visibility = View.VISIBLE
+				binding.tvRecommend.visibility = View.VISIBLE
 				constraintSet.clone(binding.constraintHome)
 				constraintSet.connect(
 					binding.recyclerView.id,

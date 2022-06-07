@@ -45,6 +45,7 @@ class HomeFragment : Fragment() {
 
 		return binding.root
 	}
+
 	private fun showData(data: List<NewRecipeItem>?) {
 		binding.recyclerView.apply {
 			val mAdapter = RecipeAdapter()

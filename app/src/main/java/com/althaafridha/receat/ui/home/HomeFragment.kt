@@ -60,6 +60,7 @@ class HomeFragment : Fragment() {
 		return binding.root
 	}
 
+
 	private fun showHeadlineData(data: List<ResultsItem>?) {
 		binding.rvHead.apply {
 			val mAdapter = HeadlineAdapter()
@@ -139,7 +140,7 @@ class HomeFragment : Fragment() {
 				constraintSet.connect(
 					binding.recyclerView.id,
 					ConstraintSet.TOP,
-					binding.cvSearch.id,
+					binding.tvRecommend.id,
 					ConstraintSet.BOTTOM
 				)
 			}
@@ -159,6 +160,7 @@ class HomeFragment : Fragment() {
 		} else {
 			binding.progressMain.visibility = View.INVISIBLE
 			binding.recyclerView.visibility = View.VISIBLE
+
 		}
 	}
 }

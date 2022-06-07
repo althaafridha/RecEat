@@ -11,14 +11,14 @@
     <color name="colorPrimary">#D4ECDD</color>
     <color name="colorPrimarySecond">#345B63</color>
     <color name="colorPrimaryThird">#152D35</color>
-    <color name="colorPrimaryDark">#149BCB</color>
-    <color name="colorAccent">#34CBFF</color>
+    <color name="colorPrimaryDark">#354259</color>
+    <color name="colorAccent">#CDC2AE</color>
 
     <color name="grey">#F8FAF9</color>
     <color name="blue">#5AB0FF</color>
     <color name="dark_grey">#4C4C4C</color>
 
-
+    <color name="color_primary_light">#F7F8FB</color>
 
 
 </resources>

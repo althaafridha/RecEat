@@ -38,17 +38,17 @@ class DetailFragment : Fragment() {
         binding.apply {
             var result = ""
             for (i in it?.results?.ingredient?.indices!!) {
-                result += it?.results?.ingredient?.get(i) + "\n"
+                result += it.results.ingredient[i] + "\n"
             }
-            val title = it?.results?.title?.split(",")?.get(0)
+            val title = it.results.title?.split(",")?.get(0)
             val formattedTitle = title?.replace("Resep ", "")
             tvTitle.text = formattedTitle
             Glide.with(requireContext())
-                .load(it?.results?.thumb)
+                .load(it.results.thumb)
                 .into(imgDetail)
-            tvTimes.text = it?.results?.times ?: "-"
-            tvDifficulty.text = it?.results?.dificulty ?: "-"
-            tvPortion.text = it?.results?.servings ?: "-"
+            tvTimes.text = it.results.times ?: "-"
+            tvDifficulty.text = it.results.dificulty ?: "-"
+            tvPortion.text = it.results.servings ?: "-"
             tvDetail.text = result
 
         }

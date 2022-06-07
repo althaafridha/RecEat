@@ -15,7 +15,6 @@ import com.bumptech.glide.request.RequestOptions
 class RecipeAdapter() : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 	private var listNewRecipe = ArrayList<NewRecipeItem>()
 
-
 	fun setData(data: List<NewRecipeItem>?) {
 		if (data == null) return
 		listNewRecipe.clear()

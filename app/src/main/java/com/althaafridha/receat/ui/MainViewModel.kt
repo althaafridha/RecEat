@@ -2,6 +2,7 @@ package com.althaafridha.receat.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.althaafridha.receat.data.HeadRecipeResponse
 import com.althaafridha.receat.data.NewRecipeResponse
 import com.althaafridha.receat.data.network.ApiClient
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -12,6 +13,7 @@ class MainViewModel : ViewModel() {
 	var isLoading = MutableLiveData<Boolean>()
 	var isError = MutableLiveData<Throwable>()
 	var recipeResponse = MutableLiveData<NewRecipeResponse>()
+	var headResponse = MutableLiveData<HeadRecipeResponse>()
 
 	fun getData(responseHandler: (NewRecipeResponse) -> Unit, errorHandler: (Throwable) -> Unit) {
 		ApiClient.getApiService().getNewRecipe()
@@ -28,6 +30,19 @@ class MainViewModel : ViewModel() {
 
 	fun getDataByQuery(responseHandler: (NewRecipeResponse) -> Unit, errorHandler: (Throwable) -> Unit, query: String) {
 		ApiClient.getApiService().getRecipeBySearch(query)
+			// membuat background thread / proses asynchronous
+			.subscribeOn(Schedulers.io())
+			// menentukan dimana thread akan dibuat
+			.observeOn(AndroidSchedulers.mainThread())
+			.subscribe({
+				responseHandler(it)
+			}, {
+				errorHandler(it)
+			})
+	}
+
+	fun getHeadData(responseHandler: (HeadRecipeResponse) -> Unit, errorHandler: (Throwable) -> Unit) {
+		ApiClient.getApiService().getHeadRecipe()
 			// membuat background thread / proses asynchronous
 			.subscribeOn(Schedulers.io())
 			// menentukan dimana thread akan dibuat
@@ -59,6 +74,17 @@ class MainViewModel : ViewModel() {
 			isLoading.value = false
 			isError.value = it
 		}, query)
+	}
+
+	fun getHeadRecipe() {
+		isLoading.value = true
+		getHeadData({
+			isLoading.value = false
+			headResponse.value = it
+		}, {
+			isLoading.value = false
+			isError.value = it
+		})
 	}
 
 }

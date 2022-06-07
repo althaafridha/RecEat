@@ -12,10 +12,13 @@ import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.althaafridha.receat.R
 import com.althaafridha.receat.data.NewRecipeItem
+import com.althaafridha.receat.data.ResultsItem
 import com.althaafridha.receat.databinding.FragmentHomeBinding
+import com.althaafridha.receat.ui.HeadlineAdapter
 import com.althaafridha.receat.ui.MainViewModel
 import com.althaafridha.receat.ui.RecipeAdapter
 import com.althaafridha.receat.utils.OnItemClickCallback
+import com.althaafridha.receat.utils.OnItemClickCallbackHead
 
 class HomeFragment : Fragment() {
 
@@ -40,15 +43,19 @@ class HomeFragment : Fragment() {
 		viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
 		viewModel.isError.observe(viewLifecycleOwner) { showError(it) }
 		viewModel.recipeResponse.observe(viewLifecycleOwner) {
-			showData(it.result)
+			showData(it.result, null)
+		}
+		viewModel.headResponse.observe(viewLifecycleOwner) {
+			showData(null, it.results as List<ResultsItem>?)
 		}
 
 		return binding.root
 	}
 
-	private fun showData(data: List<NewRecipeItem>?) {
+	private fun showData(data: List<NewRecipeItem>?, headlineData: List<ResultsItem>?) {
 		binding.recyclerView.apply {
 			val mAdapter = RecipeAdapter()
+
 			mAdapter.setData(data)
 			layoutManager = LinearLayoutManager(context)
 			adapter = mAdapter
@@ -60,6 +67,22 @@ class HomeFragment : Fragment() {
 				}
 			})
 		}
+
+		binding.rvHead.apply {
+			val mAdapter = HeadlineAdapter()
+			mAdapter.setData(headlineData)
+			layoutManager = LinearLayoutManager(context)
+			adapter = mAdapter
+			mAdapter.setOnItemClickCallback(object : OnItemClickCallbackHead {
+				override fun onItemClicked(item: ResultsItem) {
+					val bundle = Bundle()
+					bundle.putString("RECIPE_NAME", item.title)
+					findNavController(binding.root).navigate(R.id.action_homeFragment_to_detailFragment, bundle)
+				}
+			})
+		}
+
+
 	}
 
 	private fun setUpSortByMenu() {
@@ -67,9 +90,9 @@ class HomeFragment : Fragment() {
 			androidx.appcompat.widget.SearchView.OnQueryTextListener {
 			override fun onQueryTextSubmit(query: String): Boolean {
 				viewModel.getNewRecipeBySearch(query)
-				binding.rectangle2.visibility = View.GONE
+				binding.rvHead.visibility = View.GONE
 				viewModel.recipeResponse.observe (viewLifecycleOwner) {
-					showData(it.result)
+					showData(it.result, null    )
 				}
 				return false
 			}
@@ -78,7 +101,10 @@ class HomeFragment : Fragment() {
 				viewModel.getNewRecipeBySearch(newText)
 				binding.svSearch.visibility = View.VISIBLE
 				viewModel.recipeResponse.observe (viewLifecycleOwner) {
-					showData(it.result)
+					showData(it.result, null)
+				}
+				viewModel.recipeResponse.observe (viewLifecycleOwner) {
+					showData(it.result, null)
 				}
 				return false
 			}
@@ -88,10 +114,7 @@ class HomeFragment : Fragment() {
 		binding.svSearch.setOnQueryTextFocusChangeListener { _, b ->
 			val constraintSet = ConstraintSet()
 			if (b) {
-				binding.rectangle2.visibility = View.GONE
-				binding.tvToday.visibility = View.GONE
-				binding.newRecipe.visibility = View.GONE
-				binding.tvSeeAll.visibility = View.GONE
+				binding.rvHead.visibility = View.GONE
 				constraintSet.clone(binding.constraintHome)
 				constraintSet.connect(
 					binding.recyclerView.id,
@@ -100,15 +123,12 @@ class HomeFragment : Fragment() {
 					ConstraintSet.BOTTOM
 				)
 			} else {
-				binding.rectangle2.visibility = View.VISIBLE
-				binding.tvToday.visibility = View.VISIBLE
-				binding.newRecipe.visibility = View.VISIBLE
-				binding.tvSeeAll.visibility = View.VISIBLE
+				binding.rvHead.visibility = View.VISIBLE
 				constraintSet.clone(binding.constraintHome)
 				constraintSet.connect(
 					binding.recyclerView.id,
 					ConstraintSet.TOP,
-					binding.newRecipe.id,
+					binding.cvSearch.id,
 					ConstraintSet.BOTTOM
 				)
 			}

@@ -18,11 +18,11 @@
     </style>
 
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
-        <item name="android:textSize">20sp</item>
-        <item name="android:editTextColor">@color/dark_grey</item>
-        <item name="tint">@color/dark_grey</item>
-        <item name="android:textColorHint">@color/dark_grey</item>
-        <item name="android:textCursorDrawable">@color/dark_grey</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:editTextColor">@color/grey</item>
+        <item name="tint">@color/grey</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:textCursorDrawable">@color/grey</item>
     </style>
 
 </resources>

@@ -59,6 +59,6 @@ class HeadlineAdapter : RecyclerView.Adapter<HeadlineAdapter.MyViewHolder>() {
 		}
 	}
 
-	override fun getItemCount() = 5
+	override fun getItemCount() = 7
 
 }

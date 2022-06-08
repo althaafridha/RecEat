@@ -15,9 +15,6 @@
         android:theme="@style/Theme.RecEat"
         android:fitsSystemWindows="true">
 
-        <receiver android:name=".notification.NotificationService"
-            android:enabled="true" />
-
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
@@ -27,6 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".notification.NotificationService"
+            android:enabled="true" />
     </application>
 
 </manifest>

@@ -59,16 +59,16 @@ class NotificationService : BroadcastReceiver() {
 
     private fun getBeginTime(): Calendar {
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 13)
-        calendar.set(Calendar.MINUTE, 31)
+        calendar.set(Calendar.HOUR_OF_DAY, 10)
+        calendar.set(Calendar.MINUTE, 45)
         calendar.set(Calendar.SECOND, 0)
         return calendar
     }
 
     private fun getEndTime(): Calendar {
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 13)
-        calendar.set(Calendar.MINUTE, 35)
+        calendar.set(Calendar.HOUR_OF_DAY, 10)
+        calendar.set(Calendar.MINUTE, 45)
         calendar.set(Calendar.SECOND, 30)
         return calendar
     }

@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 		_binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 
-
 		NotificationService().scheduleNotification(applicationContext, "Ada masakan baru nih", "Cek dulu")
 
 //		val navView: BottomNavigationView = binding.navView

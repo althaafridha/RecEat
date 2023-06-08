@@ -1,9 +1,10 @@
 package com.althaafridha.receat.utils
 
-import com.althaafridha.receat.data.ResultsItem
+
+import com.althaafridha.receat.data.response.Recipe
 
 interface OnItemClickCallbackHead {
 
-	fun onItemClicked(item: ResultsItem)
+	fun onItemClicked(item: Recipe)
 
 }

@@ -11,16 +11,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.althaafridha.receat.R
-import com.althaafridha.receat.data.NewRecipeItem
-import com.althaafridha.receat.data.ResultsItem
+import com.althaafridha.receat.data.response.Recipe
 import com.althaafridha.receat.databinding.FragmentHomeBinding
 import com.althaafridha.receat.ui.HeadlineAdapter
 import com.althaafridha.receat.ui.MainViewModel
 import com.althaafridha.receat.ui.RecipeAdapter
 import com.althaafridha.receat.utils.OnItemClickCallback
-import com.althaafridha.receat.utils.OnItemClickCallbackHead
-import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
+import com.reift.bikinin.customview.CarouselLayoutManager
 
 class HomeFragment : Fragment() {
 
@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
 		viewModel.getNewRecipe()
 
 		viewModel.recipeResponse.observe(viewLifecycleOwner) {
-			showHomeData(it.result)
+			showHomeData(it.meals)
 		}
 
 		viewModel.getHeadRecipe()
@@ -54,28 +54,24 @@ class HomeFragment : Fragment() {
 
 
 		viewModel.headResponse.observe(viewLifecycleOwner) {
-			showHeadlineData(it.results)
+			showHeadlineData(it.meals)
 		}
 
 		return binding.root
 	}
 
 
-	private fun showHeadlineData(data: List<ResultsItem>?) {
+	private fun showHeadlineData(data: List<Recipe>?) {
 		binding.rvHead.apply {
 			val mAdapter = HeadlineAdapter()
 			mAdapter.setData(data)
-			set3DItem(true)
-			setInfinite(true)
-			setAlpha(true)
-			setFlat(true)
-			setIsScrollingEnabled(true)
-			layoutManager = getCarouselLayoutManager()
+			PagerSnapHelper().attachToRecyclerView(this)
+			layoutManager = CarouselLayoutManager(context, RecyclerView.HORIZONTAL, false)
 			adapter = mAdapter
 		}
 	}
 
-	private fun showHomeData(data: List<NewRecipeItem>?) {
+	private fun showHomeData(data: List<Recipe>?) {
 		binding.recyclerView.apply {
 			val mAdapter = RecipeAdapter()
 
@@ -83,9 +79,9 @@ class HomeFragment : Fragment() {
 			layoutManager = LinearLayoutManager(context)
 			adapter = mAdapter
 			mAdapter.setOnItemClickCallback(object : OnItemClickCallback {
-				override fun onItemClicked(item: NewRecipeItem) {
+				override fun onItemClicked(item: Recipe) {
 					val bundle = Bundle()
-					bundle.putString("RECIPE_NAME", item.name)
+					bundle.putString("RECIPE_NAME", item.idMeal)
 					findNavController(binding.root).navigate(R.id.action_homeFragment_to_detailFragment, bundle)
 				}
 			})
@@ -114,7 +110,7 @@ class HomeFragment : Fragment() {
 				viewModel.getNewRecipeBySearch(newText)
 				binding.svSearch.visibility = View.VISIBLE
 				viewModel.recipeResponse.observe (viewLifecycleOwner) {
-					showHomeData(it.result)
+					showHomeData(it.meals)
 				}
 				return false
 			}

@@ -7,9 +7,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Recipe(
 
-	@field:SerializedName("strImageSource")
-	val strImageSource: Any,
-
 	@field:SerializedName("strIngredient10")
 	val strIngredient10: String,
 
@@ -43,14 +40,11 @@ data class Recipe(
 	@field:SerializedName("strArea")
 	val strArea: String,
 
-	@field:SerializedName("strCreativeCommonsConfirmed")
-	val strCreativeCommonsConfirmed: Any,
-
 	@field:SerializedName("strIngredient19")
 	val strIngredient19: String,
 
 	@field:SerializedName("strTags")
-	val strTags: Any,
+	val strTags: String,
 
 	@field:SerializedName("idMeal")
 	val idMeal: String,
@@ -111,12 +105,6 @@ data class Recipe(
 
 	@field:SerializedName("strMeasure11")
 	val strMeasure11: String,
-
-	@field:SerializedName("dateModified")
-	val dateModified: Any,
-
-	@field:SerializedName("strDrinkAlternate")
-	val strDrinkAlternate: Any,
 
 	@field:SerializedName("strSource")
 	val strSource: String,

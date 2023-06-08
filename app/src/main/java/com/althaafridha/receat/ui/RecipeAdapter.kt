@@ -3,7 +3,7 @@ package com.althaafridha.receat.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.althaafridha.receat.data.NewRecipeItem
+import com.althaafridha.receat.data.response.Recipe
 import com.althaafridha.receat.databinding.RowItemRecBinding
 import com.althaafridha.receat.utils.OnItemClickCallback
 import com.bumptech.glide.Glide
@@ -13,9 +13,9 @@ import com.bumptech.glide.request.RequestOptions
 
 
 class RecipeAdapter() : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
-	private var listNewRecipe = ArrayList<NewRecipeItem>()
+	private var listNewRecipe = ArrayList<Recipe>()
 
-	fun setData(data: List<NewRecipeItem>?) {
+	fun setData(data: List<Recipe>?) {
 		if (data == null) return
 		listNewRecipe.clear()
 		listNewRecipe.addAll(data)
@@ -37,15 +37,16 @@ class RecipeAdapter() : RecyclerView.Adapter<RecipeAdapter.MyViewHolder>() {
 	override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 		val data = listNewRecipe[position]
 		holder.binding.apply {
-			val splittedData = data.name?.substring(5, data.name.length)?.split("-")?.toTypedArray()
-			val capitalizedData = splittedData?.map {
+			val splittedData = data.strMeal.substring(5, data.strMeal.length).split("-")
+				.toTypedArray()
+			val capitalizedData = splittedData.map {
 				it.capitalize()
 			}
-			val joinedData = capitalizedData?.joinTo(StringBuilder(), separator = " ")
+			val joinedData = capitalizedData.joinTo(StringBuilder(), separator = " ")
 
 			itemName.text = joinedData
 			Glide.with(itemImg.context)
-				.load(data.imageUrl)
+				.load(data.strMealThumb)
 				.apply(RequestOptions())
 				.override(500, 500)
 				.diskCacheStrategy(DiskCacheStrategy.ALL)

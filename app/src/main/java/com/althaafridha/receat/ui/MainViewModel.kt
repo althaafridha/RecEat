@@ -2,9 +2,9 @@ package com.althaafridha.receat.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.althaafridha.receat.data.HeadRecipeResponse
-import com.althaafridha.receat.data.NewRecipeResponse
+import com.althaafridha.receat.data.Dummy
 import com.althaafridha.receat.data.network.ApiClient
+import com.althaafridha.receat.data.response.RecipeResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
@@ -12,11 +12,11 @@ class MainViewModel : ViewModel() {
 
 	var isLoading = MutableLiveData<Boolean>()
 	var isError = MutableLiveData<Throwable>()
-	var recipeResponse = MutableLiveData<NewRecipeResponse>()
-	var headResponse = MutableLiveData<HeadRecipeResponse>()
+	var recipeResponse = MutableLiveData<RecipeResponse>()
+	var headResponse = MutableLiveData<RecipeResponse>()
 
-	fun getData(responseHandler: (NewRecipeResponse) -> Unit, errorHandler: (Throwable) -> Unit) {
-		ApiClient.getApiService().getNewRecipe()
+	fun getData(responseHandler: (RecipeResponse) -> Unit, errorHandler: (Throwable) -> Unit) {
+		ApiClient.getApiService().getNewRecipe(Dummy.listCategory)
 			// membuat background thread / proses asynchronous
 			.subscribeOn(Schedulers.io())
 			// menentukan dimana thread akan dibuat
@@ -28,7 +28,7 @@ class MainViewModel : ViewModel() {
 			})
 	}
 
-	fun getDataByQuery(responseHandler: (NewRecipeResponse) -> Unit, errorHandler: (Throwable) -> Unit, query: String) {
+	fun getDataByQuery(responseHandler: (RecipeResponse) -> Unit, errorHandler: (Throwable) -> Unit, query: String) {
 		ApiClient.getApiService().getRecipeBySearch(query)
 			// membuat background thread / proses asynchronous
 			.subscribeOn(Schedulers.io())
@@ -41,8 +41,8 @@ class MainViewModel : ViewModel() {
 			})
 	}
 
-	fun getHeadData(responseHandler: (HeadRecipeResponse) -> Unit, errorHandler: (Throwable) -> Unit) {
-		ApiClient.getApiService().getHeadRecipe()
+	fun getHeadData(responseHandler: (RecipeResponse) -> Unit, errorHandler: (Throwable) -> Unit) {
+		ApiClient.getApiService().getHeadRecipe(Dummy.listCategory)
 			// membuat background thread / proses asynchronous
 			.subscribeOn(Schedulers.io())
 			// menentukan dimana thread akan dibuat

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="..\:/Users/Danish/AndroidStudioProjects/RecEat/app/src/main/res/drawable/ic_baseline_breakfast_dining_24.xml" value="0.1" />
         <entry key="..\:/Users/Danish/AndroidStudioProjects/RecEat/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.164" />
         <entry key="..\:/Users/Danish/AndroidStudioProjects/RecEat/app/src/main/res/layout/activity_detail.xml" value="0.25" />
@@ -21,7 +22,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15030467246004625" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.36115183070086043" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.14619140625000004" />
         <entry key="app/src/main/res/layout/row_item_rec.xml" value="0.21761658031088082" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2147567749023438" />
       </map>

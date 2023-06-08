@@ -16,7 +16,7 @@ interface ApiService {
 
 	@GET("lookup.php")
 	fun getDetailRecipe(
-		@Path("i")
+		@Query("i")
 		id: String
 	): Flowable<RecipeResponse>
 

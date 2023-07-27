@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.althaafridha.receat.data.DetailResponse
+import com.althaafridha.receat.data.response.Recipe
 import com.althaafridha.receat.databinding.FragmentDetailBinding
 import com.bumptech.glide.Glide
 
@@ -29,27 +29,21 @@ class DetailFragment : Fragment() {
         viewModel.getDetailById(data!!)
         viewModel.isLoading.observe(viewLifecycleOwner) {showLoading(it)}
         viewModel.detailResponse.observe(viewLifecycleOwner){
-            initView(it)
+            initView(it.meals[0])
         }
         return binding.root
     }
 
-    private fun initView(it: DetailResponse?) {
+    private fun initView(it: Recipe) {
         binding.apply {
-            var result = ""
-            for (i in it?.results?.ingredient?.indices!!) {
-                result += it.results.ingredient[i] + "\n"
-            }
-            val title = it.results.title?.split(",")?.get(0)
-            val formattedTitle = title?.replace("Resep ", "")
-            tvTitle.text = formattedTitle
+            tvTitle.text = it.strMeal
             Glide.with(requireContext())
-                .load(it.results.thumb)
+                .load(it.strMealThumb)
                 .into(imgDetail)
-            tvTimes.text = it.results.times ?: "-"
-            tvDifficulty.text = it.results.dificulty ?: "-"
-            tvPortion.text = it.results.servings ?: "-"
-            tvDetail.text = result
+            tvTimes.text = it.strCategory
+            tvDifficulty.text = it.strArea
+            tvPortion.text = it.strTags
+            tvDetail.text = it.strInstructions
 
         }
     }

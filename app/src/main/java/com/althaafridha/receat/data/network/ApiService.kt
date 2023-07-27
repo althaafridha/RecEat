@@ -1,8 +1,6 @@
 package com.althaafridha.receat.data.network
 
-import com.althaafridha.receat.data.DetailResponse
-import com.althaafridha.receat.data.HeadRecipeResponse
-import com.althaafridha.receat.data.NewRecipeResponse
+import com.althaafridha.receat.data.response.RecipeResponse
 import io.reactivex.rxjava3.core.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -10,20 +8,28 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-	@GET("api/recipes")
-	fun getNewRecipe(): Flowable<NewRecipeResponse>
+	@GET("search.php")
+	fun getNewRecipe(
+		@Query("s")
+		query: String
+	): Flowable<RecipeResponse>
 
-	@GET("/api/recipe/{key}")
+	@GET("lookup.php")
 	fun getDetailRecipe(
-		@Path("key") key: String
-	): Flowable<DetailResponse>
+		@Query("i")
+		id: String
+	): Flowable<RecipeResponse>
 
-	@GET("/api/search")
+	@GET("search.php?")
 	fun getRecipeBySearch(
-		@Query("q") key: String
-	): Flowable<NewRecipeResponse>
+		@Query("s")
+		query: String
+	): Flowable<RecipeResponse>
 
-	@GET("/api/recipes/1")
-	fun getHeadRecipe(): Flowable<HeadRecipeResponse>
+	@GET("search.php")
+	fun getHeadRecipe(
+		@Query("s")
+		query: String
+	): Flowable<RecipeResponse>
 
 }

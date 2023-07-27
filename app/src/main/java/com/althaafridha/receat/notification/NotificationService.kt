@@ -1,10 +1,12 @@
 package com.althaafridha.receat.notification
 
 import android.app.AlarmManager
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.os.Build
 import android.util.Log
@@ -21,7 +23,7 @@ class NotificationService : BroadcastReceiver() {
             .setContentText(intent.getStringExtra(messageExtra))
             .build()
 
-        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val manager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         manager.notify(notificationID, notification)
     }
 
@@ -33,6 +35,19 @@ class NotificationService : BroadcastReceiver() {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val time = getRandomTime(getBeginTime(), getEndTime())
         Log.i("Notification", "scheduleNotification: ${time.time}")
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val mChannel = NotificationChannel(
+                channelID,
+                "General Notifications",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            mChannel.description = "This is default channel used for all other notifications"
+
+            val notificationManager =
+                context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(mChannel)
+        }
 
         val pendingIntent = PendingIntent.getBroadcast(
             context,
@@ -59,17 +74,17 @@ class NotificationService : BroadcastReceiver() {
 
     private fun getBeginTime(): Calendar {
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 10)
-        calendar.set(Calendar.MINUTE, 45)
+        calendar.set(Calendar.HOUR_OF_DAY, 11)
+        calendar.set(Calendar.MINUTE, 8)
         calendar.set(Calendar.SECOND, 0)
         return calendar
     }
 
     private fun getEndTime(): Calendar {
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 10)
-        calendar.set(Calendar.MINUTE, 45)
-        calendar.set(Calendar.SECOND, 30)
+        calendar.set(Calendar.HOUR_OF_DAY, 11)
+        calendar.set(Calendar.MINUTE, 9)
+        calendar.set(Calendar.SECOND, 0)
         return calendar
     }
 
@@ -87,6 +102,7 @@ class NotificationService : BroadcastReceiver() {
 //            context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 //        notificationManager.createNotificationChannel(channel)
 //    }
+//
 //    private fun showAlert(context: Context, title: String, message: String) {
 //        AlertDialog.Builder(context)
 //            .setTitle("Reado Book Recommendation")

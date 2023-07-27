@@ -22,8 +22,13 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15030467246004625" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.36115183070086043" />
+
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.14619140625000004" />
+
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.12136688232421874" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.16983695652173914" />
         <entry key="app/src/main/res/layout/row_item_rec.xml" value="0.21761658031088082" />
+        <entry key="app/src/main/res/layout/row_item_today.xml" value="0.16983695652173914" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2147567749023438" />
       </map>
     </option>

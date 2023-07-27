@@ -2,10 +2,7 @@ package com.althaafridha.receat.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import com.althaafridha.receat.R
 import com.althaafridha.receat.databinding.ActivityMainBinding
 import com.althaafridha.receat.notification.NotificationService
@@ -40,6 +37,4 @@ class MainActivity : AppCompatActivity() {
 //	override fun onSupportNavigateUp(): Boolean {
 //		val navController = findNavController(binding.navView)
 //		return super.onSupportNavigateUp() || navController.navigateUp()
-//	}
-
-}
+	}
